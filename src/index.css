@@ -1,3 +1,4 @@
+/* Reset */
 * {
     margin: 0;
     border: 0;
@@ -11,11 +12,13 @@ a {
     text-decoration: none;
 }
 
+/* Color */
 :root {
     --color-border: #6b7280;
     --color-logo: #ff0000;
 }
 
+/* Font Weight */
 :root {
     --weight-300: 300;
     --weight-400: 400;

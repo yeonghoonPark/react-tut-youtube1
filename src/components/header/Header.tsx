@@ -1,30 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { styled } from "styled-components";
-import YoutubeIcon from "../icons/YoutubeIcon";
+import YouTubeLogo from "./YouTubeLogo";
+import SearchForm from "./SearchForm";
+import ThemeButton from "./ThemeButton";
 
 export default function Header() {
     return (
         <SHeader>
-            <Link to={"/"}>
-                <Logo>
-                    <YoutubeIcon />
-                    Yoctube
-                </Logo>
-            </Link>
+            <YouTubeLogo />
+            <SearchForm />
+            <ThemeButton />
         </SHeader>
     );
 }
 
 const SHeader = styled.header`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     border-bottom: 1px solid var(--color-border);
-`;
-
-const Logo = styled.h1`
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 2rem;
-    font-weight: var(--weight-800);
 `;
