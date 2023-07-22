@@ -1,0 +1,27 @@
+/* Reset */
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: var(--weight-400);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Color */
+:root {
+    --color-border: #6b7280;
+    --color-logo: #ff0000;
+}
+
+/* Font Weight */
+:root {
+    --weight-300: 300;
+    --weight-400: 400;
+    --weight-700: 700;
+    --weight-800: 800;
+}
