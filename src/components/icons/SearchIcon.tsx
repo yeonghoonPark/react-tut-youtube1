@@ -1,9 +1,12 @@
 import React from "react";
-import { BsFillSearchHeartFill } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { styled } from "styled-components";
 
 export default function SearchIcon() {
-    return <SBsFillSearchHeartFill />;
+  return <SBsSearch />;
 }
 
-const SBsFillSearchHeartFill = styled(BsFillSearchHeartFill)``;
+const SBsSearch = styled(BsSearch)`
+  font-size: 1.5rem;
+  color: var(--color-icon);
+`;
