@@ -1,8 +1,12 @@
 import { BsFillSunFill } from "react-icons/bs";
 import { styled } from "styled-components";
 
-export default function SunIcon() {
-  return <SBsFillSunFill />;
+type Props = {
+  onClick?: () => void;
+};
+
+export default function SunIcon({ onClick }: Props) {
+  return <SBsFillSunFill onClick={onClick} />;
 }
 
 const SBsFillSunFill = styled(BsFillSunFill)`

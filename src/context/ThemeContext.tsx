@@ -1,25 +1,26 @@
 import React, { createContext, useState } from "react";
 
-type Props = {
-  children: React.ReactNode;
-};
-
 type ThemeMode = "light" | "dark";
 
-type Theme = {
+export type Theme = {
   theme: ThemeMode;
   toggleTheme: () => void;
 };
 
-const ThemeContext = createContext<Theme>({
-  theme: "light" || "dark",
+export const ThemeContext = createContext<Theme>({
+  theme: "light",
   toggleTheme: () => {},
 });
 
-export default function ThemeProvider({ children }: Props) {
-  let [theme, setTheme] = useState<ThemeMode>("light");
+type Props = {
+  children: React.ReactNode;
+};
+
+export function ThemeProvider({ children }: Props) {
+  const [theme, setTheme] = useState<ThemeMode>("light");
   const toggleTheme = () =>
-    setTheme((prev) => (theme = prev === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
