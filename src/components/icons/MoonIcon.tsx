@@ -1,8 +1,12 @@
 import { BsFillMoonFill } from "react-icons/bs";
 import { styled } from "styled-components";
 
-export default function MoonIcon() {
-  return <SMoonIcon />;
+type Props = {
+  onClick?: () => void;
+};
+
+export default function MoonIcon({ onClick }: Props) {
+  return <SMoonIcon onClick={onClick} />;
 }
 
 const SMoonIcon = styled(BsFillMoonFill)`

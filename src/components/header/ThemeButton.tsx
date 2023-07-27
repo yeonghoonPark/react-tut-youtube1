@@ -5,7 +5,15 @@ import MoonIcon from "../icons/MoonIcon";
 import { Theme, ThemeContext } from "../../context/ThemeContext";
 
 export default function ThemeButton() {
-  const { theme } = useContext<Theme>(ThemeContext);
+  const { theme, toggleTheme } = useContext<Theme>(ThemeContext);
 
-  return <SunIcon onClick={() => console.log(theme)} />;
+  return (
+    <>
+      {theme === "light" ? (
+        <SunIcon onClick={toggleTheme} />
+      ) : (
+        <MoonIcon onClick={toggleTheme} />
+      )}
+    </>
+  );
 }
