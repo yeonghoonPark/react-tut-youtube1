@@ -1,6 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
-type ThemeMode = "light" | "dark";
+const THEME_MODE_LIGHT = "light";
+const THEME_MODE_DARK = "dark";
+
+type ThemeMode = typeof THEME_MODE_LIGHT | typeof THEME_MODE_DARK;
 
 export type Theme = {
   theme: ThemeMode;
@@ -8,7 +11,7 @@ export type Theme = {
 };
 
 export const ThemeContext = createContext<Theme>({
-  theme: "light",
+  theme: THEME_MODE_LIGHT,
   toggleTheme: () => {},
 });
 
@@ -17,9 +20,15 @@ type Props = {
 };
 
 export function ThemeProvider({ children }: Props) {
-  const [theme, setTheme] = useState<ThemeMode>("light");
+  const [theme, setTheme] = useState<ThemeMode>(THEME_MODE_LIGHT);
   const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) =>
+      prev === THEME_MODE_LIGHT ? THEME_MODE_DARK : THEME_MODE_LIGHT,
+    );
+
+  useEffect(() => {
+    updateTheme(theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -27,3 +36,9 @@ export function ThemeProvider({ children }: Props) {
     </ThemeContext.Provider>
   );
 }
+
+const updateTheme = (theme: ThemeMode) => {
+  theme === THEME_MODE_DARK
+    ? document.documentElement.classList.add(THEME_MODE_DARK)
+    : document.documentElement.classList.remove(THEME_MODE_DARK);
+};

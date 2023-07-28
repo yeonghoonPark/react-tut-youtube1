@@ -14,12 +14,22 @@ a {
 
 /* Color */
 :root {
+  --color-bg-html: #ffffff;
   --color-border: #d3d3d3;
   --color-logo: #ff0000;
   --color-bg-button: #f8f8f8;
   --color-bg-button-hover: #d1d1d1;
   --color-icon: #302c2c;
-  --color-icon-hover: #e96f6f;
+
+  --color-text: #1d1b1b;
+}
+
+html.dark {
+  --color-bg-html: #000000;
+  --color-border: #444444;
+  --color-text: #ffffff;
+  --color-icon: #ffffff;
+  --color-bg-button: #c2c2c2;
 }
 
 /* Font Weight */

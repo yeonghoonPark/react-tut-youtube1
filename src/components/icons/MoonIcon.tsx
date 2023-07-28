@@ -13,8 +13,4 @@ const SMoonIcon = styled(BsFillMoonFill)`
   font-size: 1.5rem;
   color: var(--color-icon);
   cursor: pointer;
-
-  &:hover {
-    color: var(--color-icon-hover);
-  }
 `;
