@@ -25,11 +25,14 @@ a {
 }
 
 html.dark {
-  --color-bg-html: #000000;
+  --color-bg-html: #252525;
   --color-border: #444444;
-  --color-text: #ffffff;
   --color-icon: #ffffff;
   --color-bg-button: #c2c2c2;
+  --color-bg-button-hover: #d1d1d1;
+  --color-icon: #ffffff;
+
+  --color-text: #ffffff;
 }
 
 /* Font Weight */

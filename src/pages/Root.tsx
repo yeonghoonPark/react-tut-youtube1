@@ -4,19 +4,27 @@ import Header from "../components/header/Header";
 
 export default function Root() {
   return (
-    <SContainer>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-    </SContainer>
+    <SRootContainer>
+      <SBodyContainer>
+        <Header />
+        <SMain>
+          <Outlet />
+        </SMain>
+      </SBodyContainer>
+    </SRootContainer>
   );
 }
 
-const SContainer = styled.div`
+const SRootContainer = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 100vh;
   color: var(--color-text);
   background-color: var(--color-bg-html);
 `;
+
+const SBodyContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const SMain = styled.main``;
