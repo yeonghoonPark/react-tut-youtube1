@@ -18,8 +18,8 @@ export default function Root() {
 const SRootContainer = styled.div`
   width: 100%;
   height: 100vh;
-  color: var(--color-text);
   background-color: var(--color-bg-html);
+  color: var(--color-text);
 `;
 
 const SBodyContainer = styled.div`
