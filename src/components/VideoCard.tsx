@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import dayjs from "dayjs";
+import calculateTimeDiff from "../util/calculateTimeDiff";
 import { Video } from "../model/video";
 
 type Props = {
@@ -8,15 +10,16 @@ type Props = {
 
 export default function VideoCard({ video }: Props) {
   const { id, snippet } = video;
+  const { title, thumbnails, channelTitle, publishedAt } = snippet;
+  const calculatedPublishedAt = calculateTimeDiff(dayjs(publishedAt));
 
   return (
     <>
-      <SVideoCard key={id} title={snippet.title}>
-        <img src={snippet.thumbnails.high.url} alt={`${snippet.title} img`} />
-        <h3>{snippet.title}</h3>
-
-        <p>{snippet.channelTitle}</p>
-        <time>{snippet.publishedAt}</time>
+      <SVideoCard key={id} title={title}>
+        <img src={thumbnails.high.url} alt={title} />
+        <h3>{title}</h3>
+        <p>{channelTitle}</p>
+        <time>{calculatedPublishedAt}</time>
       </SVideoCard>
     </>
   );

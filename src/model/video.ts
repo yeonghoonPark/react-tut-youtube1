@@ -6,7 +6,7 @@ type ThumbnailsObj = {
 
 export type Thumbnails = {
   default: ThumbnailsObj;
-  hight: ThumbnailsObj;
+  high: ThumbnailsObj;
   maxres: ThumbnailsObj;
   medium: ThumbnailsObj;
   standard: ThumbnailsObj;
