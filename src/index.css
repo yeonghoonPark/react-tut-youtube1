@@ -1,10 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
+
 /* Reset */
 * {
   margin: 0;
   border: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
-  font-weight: var(--weight-400);
+  font-weight: var(--weight-normal);
 }
 
 a {
@@ -20,6 +23,11 @@ li {
   list-style: none;
 }
 
+img {
+  width: 100%;
+  vertical-align: middle;
+}
+
 /* Color */
 :root {
   --color-bg-html: #ffffff;
@@ -29,11 +37,14 @@ li {
   --color-logo: #ff0000;
 
   --color-bg-button: #f8f8f8;
-  --color-bg-button-hover: #d1d1d1;
+  --color-bg-button-checked: #1d1b1b;
+  --color-bg-button-hover: #e7e7e7;
 
   --color-icon: #302c2c;
 
-  --color-text: #1d1b1b;
+  --color-text-main: #1d1b1b;
+  --color-text-checked: #ffffff;
+  --color-text-description: #575757;
 }
 
 html.dark {
@@ -44,16 +55,30 @@ html.dark {
   --color-icon: #ffffff;
 
   --color-bg-button: #c2c2c2;
-  --color-bg-button-hover: #d1d1d1;
+  --color-bg-button-checked: #ffffff;
+  --color-bg-button-hover: #e2e2e2;
 
   --color-icon: #ffffff;
 
-  --color-text: #ffffff;
+  --color-text-main: #ffffff;
+  --color-text-checked: #1d1b1b;
+  --color-text-description: #b4b4b4;
 }
 
-/* Font Weight */
+/* Font Weight, radius, transition */
 :root {
-  --weight-300: 300; /* lighter */
-  --weight-400: 400; /* normal */
-  --weight-700: 700; /* bold */
+  --weight-thin: 100; /* thin */
+  --weight-light: 300; /* light */
+  --weight-normal: 400; /* regular */
+  --weight-medium: 500; /* medium */
+  --weight-bold: 700; /* bold */
+
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+
+  --duration-300: 0.3s;
 }
