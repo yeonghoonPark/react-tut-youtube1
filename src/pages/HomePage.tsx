@@ -7,13 +7,16 @@ import { useRecoilValue } from "recoil";
 import { videoNavQueryState } from "../recoil/video/atom";
 import { v4 as uuid } from "uuid";
 
-const getVideos = async (query: string): Promise<Video[]> => {
-  console.log("[getVideos]");
+const getUrlForVideos = (query: string): string => {
+  return query === "trendy"
+    ? `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=28&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
+    : `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=28&q=${query}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
+};
 
-  const url =
-    query === "trendy"
-      ? `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=28&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
-      : `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=28&q=${query}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
+const getVideos = async (query: string): Promise<Video[]> => {
+  console.log("[##$$getVideos]");
+
+  const url = getUrlForVideos(query);
 
   const data = await fetch(url)
     .then((res) => res.json())
@@ -25,11 +28,11 @@ const getVideos = async (query: string): Promise<Video[]> => {
 export default function HomePage() {
   const videoNavQuery = useRecoilValue(videoNavQueryState);
   const {
-    data: mostPopularVideos,
+    data: videos,
     isLoading,
     error,
   } = useQuery(
-    ["mostPopularVideos", videoNavQuery], // key
+    ["videos", videoNavQuery], // key
     () => getVideos(videoNavQuery), // fetch
     {
       staleTime: 1000 * 60 * 5, // options
@@ -40,11 +43,13 @@ export default function HomePage() {
 
   if (error) return <>Something Wrong...{error}</>;
 
+  console.log(videos, "##$$videos");
+
   return (
     <section>
       <VideoGrid>
-        {mostPopularVideos &&
-          mostPopularVideos.map((video: Video) => (
+        {videos &&
+          videos.map((video: Video) => (
             <li key={uuid()}>
               <VideoCard video={video} />
             </li>

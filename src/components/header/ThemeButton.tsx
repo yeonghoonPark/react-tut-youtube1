@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import SunIcon from "../icons/SunIcon";
-import MoonIcon from "../icons/MoonIcon";
+import SunIcon from "../icon/SunIcon";
+import MoonIcon from "../icon/MoonIcon";
 
 import { Theme, ThemeContext } from "../../context/ThemeContext";
 

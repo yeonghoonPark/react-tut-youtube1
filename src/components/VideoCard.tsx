@@ -1,8 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import dayjs from "dayjs";
 import calculateTimeDiff from "../util/calculateTimeDiff";
-import { Video } from "../model/video";
+import { Video, VideoId } from "../model/video";
 
 type Props = {
   video: Video;
@@ -12,10 +13,16 @@ export default function VideoCard({ video }: Props) {
   const { id, snippet } = video;
   const { title, thumbnails, channelTitle, publishedAt } = snippet;
   const calculatedPublishedAt = calculateTimeDiff(dayjs(publishedAt));
+  const navigate = useNavigate();
+
+  const goVideoDetailPage = (id: string | VideoId) =>
+    navigate(`/videos/detail/${typeof id === "string" ? id : id.videoId}`);
+
+  const handleClick = () => goVideoDetailPage(id);
 
   return (
     <>
-      <SVideoCard key={id} title={title}>
+      <SVideoCard title={title} onClick={handleClick}>
         <img src={thumbnails.high.url} alt={title} />
         <h3>{title}</h3>
         <p>{channelTitle}</p>
@@ -35,7 +42,11 @@ const SVideoCard = styled.article`
 
   img {
     overflow: hidden;
-    border-radius: var(--radius-base);
+    border-radius: var(--radius-md);
+    transition: var(--duration-300);
+    &:hover {
+      transform: scale(1.025);
+    }
   }
 
   h3 {
@@ -44,7 +55,7 @@ const SVideoCard = styled.article`
     word-break: break-all;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-weight: var(--weight-700);
+    font-weight: var(--weight-bold);
   }
 
   time {

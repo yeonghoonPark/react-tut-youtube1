@@ -1,16 +1,14 @@
 import React from "react";
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
-import YoutubeIcon from "../icons/YoutubeIcon";
+
+import YoutubeIcon from "../icon/YoutubeIcon";
 
 export default function YouTubeLogo() {
   return (
-    <Link to={"/"}>
-      <Logo>
-        <YoutubeIcon />
-        <Title>Yoctube</Title>
-      </Logo>
-    </Link>
+    <Logo>
+      <YoutubeIcon />
+      <Title>Yoctube</Title>
+    </Logo>
   );
 }
 
@@ -22,5 +20,6 @@ const Logo = styled.div`
 
 const Title = styled.h1`
   font-size: 2rem;
-  font-weight: var(--weight-800);
+  font-weight: var(--weight-bold);
+  user-select: none;
 `;

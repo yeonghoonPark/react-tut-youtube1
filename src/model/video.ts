@@ -1,3 +1,8 @@
+export type VideoId = {
+  kind?: string;
+  videoId?: string;
+};
+
 type ThumbnailsObj = {
   widht: number;
   height: number;
@@ -32,7 +37,7 @@ type Snippet = {
 
 export type Video = {
   etag: string;
-  id: string;
+  id: string | VideoId;
   kind: string;
   snippet: Snippet;
 };

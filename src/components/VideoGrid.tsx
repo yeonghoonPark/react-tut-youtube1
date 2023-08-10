@@ -10,10 +10,25 @@ export default function VideoGrid({ children }: Props) {
 }
 
 const SVideoGrid = styled.ul`
+  // default
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(auto, 1fr);
   grid-column-gap: 8px;
   grid-row-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+
+  // lg
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // md
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // sm
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
