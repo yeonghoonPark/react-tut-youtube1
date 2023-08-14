@@ -1,28 +1,6 @@
-export type VideoId = {
-  kind?: string;
-  videoId?: string;
-};
+import { Localized, Thumbnails } from "./common";
 
-type ThumbnailsObj = {
-  widht: number;
-  height: number;
-  url: string;
-};
-
-export type Thumbnails = {
-  default: ThumbnailsObj;
-  high: ThumbnailsObj;
-  maxres: ThumbnailsObj;
-  medium: ThumbnailsObj;
-  standard: ThumbnailsObj;
-};
-
-type Localized = {
-  title: string;
-  description: string;
-};
-
-type Snippet = {
+export type VideoSnippet = {
   title: string;
   description: string;
   categoryId: string;
@@ -35,9 +13,14 @@ type Snippet = {
   publishedAt: string;
 };
 
+export type VideoId = {
+  kind?: string;
+  videoId?: string;
+};
+
 export type Video = {
   etag: string;
   id: string | VideoId;
   kind: string;
-  snippet: Snippet;
+  snippet: VideoSnippet;
 };
