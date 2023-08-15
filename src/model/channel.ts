@@ -1,12 +1,12 @@
-import { Localized, Thumbnails } from "./common";
+import { Localized, ThumbnailsType } from "./common";
 
-type ChannelSnippet = {
+export type ChannelSnippet = {
   country: string;
   customUrl: string;
   description: string;
   localized: Localized;
   publishedAt: string;
-  thumbnails: Thumbnails;
+  thumbnails: ThumbnailsType;
   title: string;
 };
 

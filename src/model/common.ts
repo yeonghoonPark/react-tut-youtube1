@@ -1,15 +1,15 @@
-type ThumbnailsObj = {
+export type ThumbnailInfo = {
   widht: number;
   height: number;
   url: string;
 };
 
-export type Thumbnails = {
-  default: ThumbnailsObj;
-  high: ThumbnailsObj;
-  maxres?: ThumbnailsObj;
-  medium: ThumbnailsObj;
-  standard?: ThumbnailsObj;
+export type ThumbnailsType = {
+  default: ThumbnailInfo;
+  high: ThumbnailInfo;
+  maxres?: ThumbnailInfo;
+  medium: ThumbnailInfo;
+  standard?: ThumbnailInfo;
 };
 
 export type Localized = {

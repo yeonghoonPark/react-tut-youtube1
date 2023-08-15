@@ -1,4 +1,4 @@
-import { Localized, Thumbnails } from "./common";
+import { Localized, ThumbnailsType } from "./common";
 
 export type VideoSnippet = {
   title: string;
@@ -8,7 +8,7 @@ export type VideoSnippet = {
   channelTitle: string;
   liveBroadcastContent: string;
   localized: Localized;
-  thumbnails: Thumbnails;
+  thumbnails: ThumbnailsType;
   tags: string[];
   publishedAt: string;
 };

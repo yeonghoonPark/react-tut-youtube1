@@ -4,21 +4,27 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import calculateTimeDiff from "../util/calculateTimeDiff";
 import { Video, VideoId } from "../model/video";
+import { useSetRecoilState } from "recoil";
+import { selectedVideoState } from "../recoil/video/atom";
 
 type Props = {
   video: Video;
 };
 
 export default function VideoCard({ video }: Props) {
+  const navigate = useNavigate();
   const { id, snippet } = video;
   const { title, thumbnails, channelTitle, publishedAt } = snippet;
   const calculatedPublishedAt = calculateTimeDiff(dayjs(publishedAt));
-  const navigate = useNavigate();
+  const setSelectedVideo = useSetRecoilState(selectedVideoState);
 
   const goVideoDetailPage = (id: string | VideoId) =>
     navigate(`/videos/detail/${typeof id === "string" ? id : id.videoId}`);
 
-  const handleClick = () => goVideoDetailPage(id);
+  const handleClick = () => {
+    setSelectedVideo(video);
+    goVideoDetailPage(id);
+  };
 
   return (
     <>
