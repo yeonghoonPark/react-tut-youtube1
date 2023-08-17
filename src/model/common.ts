@@ -1,5 +1,5 @@
 export type ThumbnailInfo = {
-  widht: number;
+  width: number;
   height: number;
   url: string;
 };

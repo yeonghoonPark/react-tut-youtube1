@@ -79,6 +79,7 @@ html.dark {
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-3xl: 20px;
+  --radius-rounded: 100%;
 
   --duration-300: 0.3s;
 }
