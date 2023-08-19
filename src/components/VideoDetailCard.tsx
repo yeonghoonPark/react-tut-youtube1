@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { ThumbnailInfo } from "../model/common";
 import { Video, VideoId } from "../model/video";
 import ChannelThumbnail from "./ChannelThumbnail";
@@ -14,28 +15,59 @@ export default function VideoDetailCard({ video, channelThumbnail }: Props) {
   };
 
   console.log(video, "##$$video");
-  console.log(channelThumbnail, "##$$channelThumbnail");
-  const { title, channelTitle } = video.snippet;
+
+  const { title, description, channelTitle } = video.snippet;
   const { url: thumbnailUrl } = channelThumbnail;
   return (
-    <>
+    <SVideoDetailCardContainer className='video-detail-card'>
       <iframe
         title={getVideoId(video.id)}
         id='ytplayer'
         itemType='html/text'
-        width='720'
+        width='100%'
         height='405'
         src={`https://www.youtube-nocookie.com/embed/${getVideoId(video.id)}`}
         frameBorder='0'
         allowFullScreen={true}
       />
-      <section>
-        <h2>{title}</h2>
-        <ChannelThumbnail
-          thumbnailSrc={thumbnailUrl}
-          thumbnailAlt={`${channelTitle} thumbnail`}
-        />
-      </section>
-    </>
+      <SContentsCard>
+        <h3>{title}</h3>
+        <div>
+          <ChannelThumbnail
+            thumbnailSrc={thumbnailUrl}
+            thumbnailAlt={`${channelTitle} thumbnail`}
+          />
+          <h4>{channelTitle}</h4>
+        </div>
+        <span>{description}</span>
+      </SContentsCard>
+    </SVideoDetailCardContainer>
   );
 }
+
+const SVideoDetailCardContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SContentsCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: var(--weight-bold);
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    h4 {
+      font-weight: var(--weight-bold);
+    }
+  }
+`;

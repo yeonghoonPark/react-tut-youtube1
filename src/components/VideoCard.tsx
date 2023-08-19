@@ -30,9 +30,11 @@ export default function VideoCard({ video }: Props) {
     <>
       <SVideoCard title={title} onClick={handleClick}>
         <img src={thumbnails.high.url} alt={title} />
-        <h3>{title}</h3>
-        <p>{channelTitle}</p>
-        <time>{calculatedPublishedAt}</time>
+        <div>
+          <h3>{title}</h3>
+          <h4>{channelTitle}</h4>
+          <time>{calculatedPublishedAt}</time>
+        </div>
       </SVideoCard>
     </>
   );
