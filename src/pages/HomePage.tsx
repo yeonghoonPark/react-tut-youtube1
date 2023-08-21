@@ -51,24 +51,14 @@ export default function HomePage() {
         {videos &&
           videos.map((video: Video) => (
             <li key={uuid()}>
-              <VideoCard video={video} />
+              <VideoCard
+                video={video}
+                flexDirectionType={"column"}
+                alignItemsType={"flex-start"}
+              />
             </li>
           ))}
       </VideoGrid>
     </section>
   );
-}
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <iframe
-title={id}
-id='ytplayer'
-itemType='html/text'
-width='720'
-height='405'
-src={`https://www.youtube-nocookie.com/embed/${id}`}
-frameBorder='0'
-allowFullScreen={true}
-/> */
 }

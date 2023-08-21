@@ -7,11 +7,20 @@ import { Video, VideoId } from "../model/video";
 import { useSetRecoilState } from "recoil";
 import { selectedVideoState } from "../recoil/video/atom";
 
+type DirectionType = "row" | "column";
+type AlignItemsType = "flex-start" | "center" | "flex-end";
+
 type Props = {
   video: Video;
+  flexDirectionType: DirectionType;
+  alignItemsType: AlignItemsType;
 };
 
-export default function VideoCard({ video }: Props) {
+export default function VideoCard({
+  video,
+  flexDirectionType,
+  alignItemsType,
+}: Props) {
   const navigate = useNavigate();
   const { id, snippet } = video;
   const { title, thumbnails, channelTitle, publishedAt } = snippet;
@@ -28,7 +37,12 @@ export default function VideoCard({ video }: Props) {
 
   return (
     <>
-      <SVideoCard title={title} onClick={handleClick}>
+      <SVideoCard
+        title={title}
+        onClick={handleClick}
+        $flexDirection={flexDirectionType}
+        $alignItems={alignItemsType}
+      >
         <img src={thumbnails.high.url} alt={title} />
         <div>
           <h3>{title}</h3>
@@ -40,15 +54,20 @@ export default function VideoCard({ video }: Props) {
   );
 }
 
-const SVideoCard = styled.article`
+const SVideoCard = styled.article<{
+  $flexDirection: DirectionType;
+  $alignItems: AlignItemsType;
+}>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ $flexDirection }) => $flexDirection};
+  align-items: ${({ $alignItems }) => $alignItems};
   gap: 8px;
   height: 100%;
   user-select: none;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   img {
+    min-width: 168px;
     overflow: hidden;
     border-radius: var(--radius-md);
     transition: var(--duration-300);
@@ -57,17 +76,20 @@ const SVideoCard = styled.article`
     }
   }
 
-  h3 {
-    width: 230px;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     overflow: hidden;
-    word-break: break-all;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-weight: var(--weight-bold);
-  }
+    width: 100%;
 
-  time {
-    font-size: 0.8rem;
-    color: var(--color-text-description);
+    h3 {
+      font-weight: var(--weight-bold);
+    }
+
+    time {
+      font-size: 0.8rem;
+      color: var(--color-text-description);
+    }
   }
 `;

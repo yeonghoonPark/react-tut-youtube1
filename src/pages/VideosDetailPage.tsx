@@ -1,11 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 import { useQuery } from "react-query";
 import { useRecoilValue } from "recoil";
 import { selectedVideoState } from "../recoil/video/atom";
 import { Channel } from "../model/channel";
+import { Video } from "../model/video";
+import VideoCard from "../components/VideoCard";
 import VideoDetailCard from "../components/VideoDetailCard";
-import styled from "styled-components";
-import { Video, VideoId } from "../model/video";
+import RelatedVideoGrid from "../components/RelatedVideoGrid";
+import { v4 as uuid } from "uuid";
 
 const getChannelInfo = async (
   channelId: string | undefined,
@@ -39,8 +42,8 @@ export default function VideosDetailPage() {
 
   const {
     data: channelInfo,
-    isLoading,
-    error,
+    isLoading: isChannelInfoLoading,
+    error: channelInfoError,
   } = useQuery(
     ["channelInfo", selectedVideo],
     () => getChannelInfo(channelId),
@@ -49,7 +52,11 @@ export default function VideosDetailPage() {
     },
   );
 
-  const { data: relatedVideos } = useQuery(
+  const {
+    data: relatedVideos,
+    isLoading: isRelatedVideosLoading,
+    error: relatedVideosError,
+  } = useQuery(
     ["relatedVideos", selectedVideo],
     () => getRelatedVideo(selectedVideo?.snippet.title),
     {
@@ -61,20 +68,39 @@ export default function VideosDetailPage() {
 
   // console.log(selectedVideo, "##$$selectedVideo");
 
-  // console.log(channelInfo, "##$$channelInfo");
+  console.log(channelInfo, "##$$channelInfo");
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isChannelInfoLoading && isRelatedVideosLoading)
+    return <span>Loading...</span>;
 
-  if (error) return <>Something Wrong...{error}</>;
+  if (channelInfoError || relatedVideosError)
+    return <>Something Wrong...{channelInfoError}</>;
+
   return (
     <SVideoDetailPageContainer>
       {channelInfo && selectedVideo && (
-        <VideoDetailCard
-          video={selectedVideo}
-          channelThumbnail={channelInfo.snippet.thumbnails.default}
-        />
+        <section>
+          <VideoDetailCard
+            video={selectedVideo}
+            channelThumbnail={channelInfo.snippet.thumbnails.default}
+          />
+        </section>
       )}
-      <div>test</div>
+
+      <section>
+        <RelatedVideoGrid>
+          {relatedVideos &&
+            relatedVideos.map((video: Video) => (
+              <li key={uuid()}>
+                <VideoCard
+                  video={video}
+                  flexDirectionType={"row"}
+                  alignItemsType={"center"}
+                />
+              </li>
+            ))}
+        </RelatedVideoGrid>
+      </section>
     </SVideoDetailPageContainer>
   );
 }
@@ -84,11 +110,11 @@ const SVideoDetailPageContainer = styled.section`
   flex-direction: row;
   gap: 1rem;
 
-  .video-detail-card {
+  section:nth-child(1) {
     width: 68%;
   }
 
-  div {
-    /* width: 30%; */
+  section:nth-child(2) {
+    width: 32%;
   }
 `;

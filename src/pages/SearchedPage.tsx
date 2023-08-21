@@ -46,7 +46,11 @@ export default function SearchedPage() {
         {searchedVideos &&
           searchedVideos.map((video: Video) => (
             <li key={uuid()}>
-              <VideoCard video={video} />
+              <VideoCard
+                video={video}
+                flexDirectionType={"column"}
+                alignItemsType={"flex-start"}
+              />
             </li>
           ))}
       </VideoGrid>

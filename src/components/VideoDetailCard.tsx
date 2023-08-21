@@ -19,7 +19,7 @@ export default function VideoDetailCard({ video, channelThumbnail }: Props) {
   const { title, description, channelTitle } = video.snippet;
   const { url: thumbnailUrl } = channelThumbnail;
   return (
-    <SVideoDetailCardContainer className='video-detail-card'>
+    <SVideoDetailCardContainer>
       <iframe
         title={getVideoId(video.id)}
         id='ytplayer'
@@ -45,7 +45,7 @@ export default function VideoDetailCard({ video, channelThumbnail }: Props) {
   );
 }
 
-const SVideoDetailCardContainer = styled.section`
+const SVideoDetailCardContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
