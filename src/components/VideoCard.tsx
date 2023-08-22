@@ -62,6 +62,7 @@ const SVideoCard = styled.article<{
   flex-direction: ${({ $flexDirection }) => $flexDirection};
   align-items: ${({ $alignItems }) => $alignItems};
   gap: 8px;
+  width: 100%;
   height: 100%;
   user-select: none;
   cursor: pointer;
@@ -80,7 +81,6 @@ const SVideoCard = styled.article<{
     display: flex;
     flex-direction: column;
     gap: 8px;
-    overflow: hidden;
     width: 100%;
 
     h3 {
