@@ -5,12 +5,11 @@ import { useQuery } from "react-query";
 import { v4 as uuid } from "uuid";
 import VideoGrid from "../components/VideoGrid";
 import VideoCard from "../components/VideoCard";
+import Loading from "../components/Loading";
 
 const getSearchedVideos = async (
   search: string | undefined,
 ): Promise<Video[]> => {
-  console.log("[##$$getSearchedVideos]");
-
   const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=28&q=${search}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
 
   const data = await fetch(url)
@@ -34,11 +33,9 @@ export default function SearchedPage() {
     },
   );
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isLoading) return <Loading />;
 
   if (error) return <>Something Wrong...{error}</>;
-
-  console.log(searchedVideos, "##$$searchedVideos");
 
   return (
     <section>

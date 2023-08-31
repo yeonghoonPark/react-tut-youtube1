@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { selectedVideoState } from "../recoil/video/atom";
 import { Channel } from "../model/channel";
 import { Video } from "../model/video";
+import Loading from "../components/Loading";
 import VideoCard from "../components/VideoCard";
 import VideoDetailCard from "../components/VideoDetailCard";
 import RelatedVideoGrid from "../components/RelatedVideoGrid";
@@ -13,8 +14,6 @@ import { v4 as uuid } from "uuid";
 const getChannelInfo = async (
   channelId: string | undefined,
 ): Promise<Channel> => {
-  console.log("[##$$getChannelInfo]");
-
   const url = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
   const data = await fetch(url)
     .then((res) => res.json())
@@ -26,8 +25,6 @@ const getChannelInfo = async (
 const getRelatedVideo = async (
   videoTitle: string | undefined,
 ): Promise<Video[]> => {
-  console.log("[##$$getRelatedVideo]");
-
   const url = ` https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=28&q=${videoTitle}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
   const data = await fetch(url)
     .then((res) => res.json())
@@ -64,14 +61,7 @@ export default function VideosDetailPage() {
     },
   );
 
-  console.log(relatedVideos, "##$$relatedVideos");
-
-  // console.log(selectedVideo, "##$$selectedVideo");
-
-  console.log(channelInfo, "##$$channelInfo");
-
-  if (isChannelInfoLoading && isRelatedVideosLoading)
-    return <span>Loading...</span>;
+  if (isChannelInfoLoading && isRelatedVideosLoading) return <Loading />;
 
   if (channelInfoError || relatedVideosError)
     return <>Something Wrong...{channelInfoError}</>;

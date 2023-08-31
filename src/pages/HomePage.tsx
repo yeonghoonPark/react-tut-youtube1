@@ -6,6 +6,7 @@ import VideoGrid from "../components/VideoGrid";
 import { useRecoilValue } from "recoil";
 import { videoNavQueryState } from "../recoil/video/atom";
 import { v4 as uuid } from "uuid";
+import Loading from "../components/Loading";
 
 const getUrlForVideos = (query: string): string => {
   return query === "trendy"
@@ -14,8 +15,6 @@ const getUrlForVideos = (query: string): string => {
 };
 
 const getVideos = async (query: string): Promise<Video[]> => {
-  console.log("[##$$getVideos]");
-
   const url = getUrlForVideos(query);
 
   const data = await fetch(url)
@@ -39,11 +38,9 @@ export default function HomePage() {
     },
   );
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isLoading) return <Loading />;
 
   if (error) return <>Something Wrong...{error}</>;
-
-  console.log(videos, "##$$videos");
 
   return (
     <section>

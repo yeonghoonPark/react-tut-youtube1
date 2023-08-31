@@ -14,8 +14,6 @@ export default function VideoDetailCard({ video, channelThumbnail }: Props) {
     return typeof id === "string" ? id : id.videoId;
   };
 
-  console.log(video, "##$$video");
-
   const { title, description, channelTitle } = video.snippet;
   const { url: thumbnailUrl } = channelThumbnail;
   return (

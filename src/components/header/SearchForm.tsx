@@ -16,10 +16,10 @@ export default function SearchForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // ##$$ 공백 return
+    // 공백 return
     if (searchVal.trim().length < 1) return;
 
-    // ##$$ " "을 +로 변환
+    // " "을 +로 변환
     const transformedSearchVal = searchVal.replace(/ /gi, "+");
 
     navigate(`/videos/${transformedSearchVal}`);
